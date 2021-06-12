@@ -1,0 +1,4 @@
+<div class="header-container">
+    <label class="app-title">Product Manager</label>
+    <mat-icon *ngIf="commonService.userLoginStatus$$ | async" (click)="logout()" class="pointer ic-logout">logout</mat-icon>
+</div>

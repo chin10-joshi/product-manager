@@ -1,0 +1,13 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .app-title {
+        font-size: larger;
+        margin: 0 10px;
+    }
+    .ic-logout {
+        margin-right: 10px;
+    }
+}
