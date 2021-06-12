@@ -53,6 +53,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxUiLoaderModule
   ],
   providers: [
     HttpService,
