@@ -1,15 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { UserDetails } from 'src/app/shared/interfaces/user';
 import { HttpService } from 'src/app/shared/services/http/http.service';
-import { REGEX_EMAIL } from 'src/app/shared/constant';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: 'app-login',
