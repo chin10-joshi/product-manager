@@ -10,7 +10,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/modules/shared/shared.module';
 import { HttpInterceptorService } from "./core/interceptor/http-interceptor.service";
 import { CommonService } from './shared/services/common/common.service';
-import { NoAccessComponent } from './components/common/no-access/no-access.component';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +20,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    NoAccessComponent,
     NotFoundComponent,
   ],
   imports: [
