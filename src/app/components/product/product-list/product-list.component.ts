@@ -20,8 +20,8 @@ export class ProductListComponent implements OnInit {
   searchedProductList: Array<ProductDetails> = [];
   @ViewChild('productTable') productTable!: MatTable<any>;
   searchControl: FormControl = new FormControl();
-  
-  constructor(private httpService: HttpService, private commonService: CommonService) { } 
+
+  constructor(private httpService: HttpService, private commonService: CommonService) { }
 
   ngOnInit(): void {
     this.updateProductList();
@@ -58,23 +58,30 @@ export class ProductListComponent implements OnInit {
       }
     }).afterClosed().pipe(takeUntil(this.destroy$)).subscribe(data => {
       if (data) {
-        const {title, price, description, image, category} = data;
+        const { title, price, description, image, category } = data;
 
         let payload: ProductDetails = {
           title, price: parseInt(price), description, image: 'https://i.pravatar.cc', category
-      }
+        }
         this.httpService.put<any>(`products/${productID}`, payload).pipe(takeUntil(this.destroy$)).subscribe((res) => {
-          let updatedProductIndex = this.searchedProductList.findIndex((product : ProductDetails) => product.id == productID);
-          if (updatedProductIndex > -1) {
-            this.searchedProductList[updatedProductIndex] = res;
-            let indexFromAllList = this.productList.findIndex((product : ProductDetails) => product.id == productID);
-            this.productList[indexFromAllList] = res;
+          if (res) {
 
+            let updatedProductIndex = this.searchedProductList.findIndex((product: ProductDetails) => product.id == productID);
+            if (updatedProductIndex > -1) {
+              this.searchedProductList[updatedProductIndex] = res;
+              let indexFromAllList = this.productList.findIndex((product: ProductDetails) => product.id == productID);
+              this.productList[indexFromAllList] = res;
+              this.commonService.openSnackBar('Record has been updated');
+            } else {
+              this.productList.push({ ...res, id: this.productList.length + 1 });
+              this.searchedProductList = this.productList;
+              this.commonService.openSnackBar('Record has been added');
+            }
+            if (this.productTable) {
+              this.productTable.renderRows();
+            }
           } else {
-            this.searchedProductList.push(res);
-          }
-          if (this.productTable) {
-            this.productTable.renderRows();
+            this.commonService.openSnackBar('Something went wrong.')
           }
         })
       }
